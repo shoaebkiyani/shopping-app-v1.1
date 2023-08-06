@@ -18,7 +18,7 @@ function Navbar() {
         <div className='flex items-center xs:space-x-2 sm:space-x-2 md:space-x-20 lg:space-x-20'>
           <div className='flex items-center text-white'>
               <img src={logo} alt="logo" className='cursor-pointer h-8 w-8 mx-2' />
-              <h1 className='cursor-pointer xs:text-xs'><span className='bg-rose-600 text-black p-1 rounded-md'>Mobile</span> Store</h1>
+              <h1 className='cursor-pointer xs:hidden'><span className='bg-rose-600 text-black p-1 rounded-md'>Mobile</span> Store</h1>
           </div>
 
         {/* Search Input */}
