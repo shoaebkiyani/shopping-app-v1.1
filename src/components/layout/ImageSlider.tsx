@@ -75,7 +75,7 @@ function ImageSlider() {
         </div>
 
         {/* Dots */}
-        <div className="flex top-4 justify-center py-2">
+        <div className="flex top-4 justify-center py-2 my-[-40px] text-zinc-200">
             {slides.map((_slide, slideIndex) => (
                 <div key={slideIndex} className='text-2xl cursor-pointer'><RxDotFilled onClick={() => (dotSlide(slideIndex))} /></div>
             ))}
