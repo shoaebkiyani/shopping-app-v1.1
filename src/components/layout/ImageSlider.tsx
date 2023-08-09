@@ -6,16 +6,14 @@ import {RxDotFilled} from 'react-icons/rx';
 function ImageSlider() {
  
     const slides = [
-        {url: '../../public/images/1.jpg'},
-        {url: '../../public/images/2.jpg'},
-        {url: '../../public/images/3.jpg'},
-        {url: '../../public/images/4.jpg'},
-        {url: '../../public/images/5.jpg'}
+        {url: '../../public/images/slider/slider_1.jpg'},
+        {url: '../../public/images/slider/slider_2.jpg'},
+        {url: '../../public/images/slider/slider_3.jpg'},
     ]
 
     const [currentIndex, setCurrentIndex] = useState(0);
-    // eslint-disable-next-line prefer-const
-    let slideRef = useRef<HTMLInputElement>(null);
+    
+    const slideRef = useRef<HTMLInputElement>(null);
     
     let slideInterval: NodeJS.Timer | NodeJS.Timeout | number;
 
@@ -26,6 +24,7 @@ function ImageSlider() {
         slideRef.current?.addEventListener("mouseleave", autoPlay);
         pauseSlide();
         autoPlay();
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     },[])
     
     const autoPlay = () => {
@@ -61,26 +60,32 @@ function ImageSlider() {
     }
    
   return (
-    <div ref={slideRef} className="max-w-[1480px] h-[580px] w-full m-auto py-2 px-4 relative group">
-        <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className="w-full h-full rounded-2xl bg-center bg-cover transition-all duration-500"></div>
-
-        {/* Left Arrow */}
-        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-            <BsChevronCompactLeft size={30} onClick={prevSlide} />
-        </div>
+    <div className='xs:flex-wrap flex sm:h-[280px] md:h-[350px] lg:h-[400px]'>
+        <div ref={slideRef} onMouseOver={pauseSlide} className="w-full xs:h-[280px] lg:h-[400px] relative group">
+            <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className="h-full bg-cover bg-no-repeat transition-all duration-500"></div>
+            
+            {/* Left Arrow */}
+            <div className="group-hover:block absolute flex top-[45%] left-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+                <BsChevronCompactLeft size={30} onClick={prevSlide} />
+            </div>
     
-        {/* Right Arrow */}
-        <div className="hidden group-hover:block absolute top-[50%] -translate-x-0 translate-y-[-50%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
-            <BsChevronCompactRight size={30} onClick={nextSlide}/>
-        </div>
+            {/* Right Arrow */}
+            <div className="group-hover:block absolute flex top-[45%] right-5 text-2xl rounded-full p-2 bg-black/20 text-white cursor-pointer">
+                <BsChevronCompactRight size={30} onClick={nextSlide}/>
+            </div>
 
-        {/* Dots */}
-        <div className="flex top-4 justify-center py-2 my-[-40px] text-zinc-200">
+
+            {/* Dots */}
+            <div className="flex top-4 justify-center py-2 my-[-50px] text-zinc-200">
             {slides.map((_slide, slideIndex) => (
                 <div key={slideIndex} className='text-2xl cursor-pointer'><RxDotFilled onClick={() => (dotSlide(slideIndex))} /></div>
-            ))}
+                ))}
+            </div>
         </div>
-
+        <div className='sm:h-[280px] md:h-[350px] lg:h-[400px]'>
+               <img className='w-full h-[50%]' src="../public/images/banner/banner_1.jpg" alt="banner" />
+               <img className='w-full h-[50%]' src="../public/images/banner/banner_2.jpg" alt="banner" />
+        </div>
     </div>
     
   )

@@ -6,7 +6,7 @@ function RootLayout() {
   return (
     <div className='root'>
         <Navbar />
-        <main className="h-[calc(100vh-56px)] bg-slate-300">
+        <main className="h-wrapper h-[calc(100%-56px)] ">
                 <Outlet />
         </main>
     </div>

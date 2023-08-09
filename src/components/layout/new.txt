@@ -1,7 +1,0 @@
-  {slides.map((slide, slideIndex) => (
-                <div key={slideIndex} onClick={()=>(dotSlide(slideIndex))} className='text-2xl cursor-pointer active:text-white'><RxDotFilled /></div>
-            ))}
-
-  {slides.map((slide, slideIndex) => (
-               <div key={slideIndex} className='text-2xl cursor-pointer active:text-white'><RxDotFilled onClick={() => (dotSlide(slideIndex))} /></div>
-            ))}

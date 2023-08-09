@@ -5,3 +5,8 @@
 .bg-rose-600 {
     background-color:hsl(0, 100%, 47%)
 }
+
+.h-wrapper {
+    max-width: 1100px;
+    margin: 0 auto;
+}
