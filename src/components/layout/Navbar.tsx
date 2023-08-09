@@ -19,7 +19,9 @@ function Navbar() {
         <div className='flex justify-between items-center xs:space-x-5 sm:space-x-5 md:space-x-16 lg:space-x-20'>
           <div className='flex items-center text-white'>
               <img src={logo} alt="logo" className='cursor-pointer h-8 w-8 mx-2' />
-              <ShopName first={"Tech"} last={"Zone"} />
+              <div className='cursor-pointer xs:hidden'>
+                <ShopName first={"Tech"} last={"Zone"} />
+              </div>
           </div>
 
         {/* Search Input */}
