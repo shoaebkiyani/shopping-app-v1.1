@@ -1,17 +1,17 @@
-import {Outlet} from 'react-router-dom'
+import { Outlet } from 'react-router-dom';
 
-import Navbar from './Navbar'
-import Footer from './Footer'
+import Navbar from './Navbar';
+import Footer from './Footer';
 
 function RootLayout() {
-  return (
-    <div className='root'>
-        <Navbar />
-        <main className="h-wrapper h-[calc(100%-56px)] ">
-                <Outlet />
-        </main>
-        <Footer />
-    </div>
-  )
+	return (
+		<div className='root'>
+			<Navbar />
+			<main className='h-wrapper pt-14 min-h-[calc(100vh-200px)]'>
+				<Outlet />
+			</main>
+			<Footer />
+		</div>
+	);
 }
-export default RootLayout
+export default RootLayout;

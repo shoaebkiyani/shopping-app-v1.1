@@ -1,6 +1,6 @@
 function About() {
-  return (
-    <div>About</div>
-  )
+	return <div className='h-wrapper container'>
+    About
+  </div>
 }
-export default About
+export default About;
