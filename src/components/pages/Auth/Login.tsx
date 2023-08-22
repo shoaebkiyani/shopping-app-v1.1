@@ -23,7 +23,7 @@ function Login() {
 
     const {username, password} = formData;
 
-    const { user, isSuccess, isError, message } = useSelector(
+    const { user, isSuccess, isLogged, isError, message } = useSelector(
 		(state: RootState) => state.user
 	);
     const dispatch = useDispatch<AppDispatch>();
@@ -37,11 +37,15 @@ function Login() {
         // Redirect when logged in
 		if (isSuccess) {
             toast.success('Loggedin Successfully', {autoClose: 1500})
-                navigate('/user');
+            if(user.role === 'ADMIN') {
+                navigate('/admin');
+            } else {
+                navigate('/user')
+            }
 		}
 
 		dispatch(reset());
-	}, [isError, isSuccess, user, message, navigate, dispatch]);
+	}, [isError, isSuccess, isLogged, user, message, navigate, dispatch]);
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>) => {
             setFormData((prevState) => ({

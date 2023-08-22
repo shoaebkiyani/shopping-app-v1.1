@@ -27,6 +27,6 @@ export function getDecodedTokenFromStorage() {
 export function getTokenFromStorage() {
     const token = localStorage.getItem('token')
     if(!token) return null
-
-    return token
+    
+    return token.slice(1, -1)
 }

@@ -1,8 +1,8 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import { isAxiosError } from 'axios'
-import api, { authHeader } from '../../api/axiosConfig'
+import api from '../../api/axiosConfig'
 import jwt_decode from 'jwt-decode'
-import { getDecodedTokenFromStorage } from '../../token/token'
+import { getDecodedTokenFromStorage, getTokenFromStorage } from '../../token/token'
+import { isAxiosError } from 'axios'
 
 enum Role {
     ADMIN = 'ADMIN',
@@ -11,8 +11,10 @@ enum Role {
 
 export interface UserState {
     user: User,
+    users: [],
     isError: boolean,
     isSuccess: boolean,
+    isLogged: boolean,
     isLoading: boolean,
     message: string
 }
@@ -31,9 +33,11 @@ export type User = {
 
 const initialState: UserState = {
     user: {id: '', username: '', role: Role.USER},
+    users: [],
     isLoading: false,
     isError: false,
     isSuccess: false,
+    isLogged: false,
     message: ''
 }
 
@@ -60,7 +64,6 @@ export const loginUser = createAsyncThunk(
         try {
             const response = await api.post('/login', user)
             if(response.data) {
-                // localStorage.setItem('user', JSON.stringify(response.data))
                 localStorage.setItem('token', JSON.stringify(response.data.token))
             }
             return {
@@ -75,16 +78,18 @@ export const loginUser = createAsyncThunk(
         }
     }
 )
-
 export const getUsers = createAsyncThunk(
-    'user/getUsers', async(token) => {
+    'user/getUsers', async() => {
         try {
+            const token = getTokenFromStorage();
+            
             const response = await api.get('/users', {
                 headers: {
-                  'Authorization': `Bearer ${token}`,
+                    'Authorization': `Bearer ${token}`
                 }
             })
-            console.log('res: ', response, 'header: ', authHeader)
+                return response.data.users
+       
         } catch (error) {
             console.log(error)
             
@@ -147,6 +152,7 @@ export const userSlice = createSlice({
           builder.addCase(loginUser.fulfilled, (state, action) => {
             state.isLoading = false
             state.isSuccess = true
+            state.isLogged = true
             const token = action.payload.token
             const decodedUser = jwt_decode(token) as DecodedUser
                 const user: User = {
@@ -158,10 +164,22 @@ export const userSlice = createSlice({
           
           })
 
-          builder.addCase(getUsers.fulfilled, (state) => {
+          builder.addCase(getUsers.pending, (state) => {
+            state.isLoading = true,
+            state.isError = false,
+            state.isLogged = true
+          })
+          builder.addCase(getUsers.fulfilled, (state, action) => {
             state.isLoading = false,
-            state.isSuccess = true
-          
+            state.isSuccess = true,
+            state.isLogged = true,
+            state.users = action.payload
+          })
+          builder.addCase(getUsers.rejected, (state, action) => {
+            state.isLoading = false,
+            state.isError = true
+            if(typeof action.error.message === 'string')
+            state.message = action.error.message
           })
 
           builder.addCase(logoutUser.fulfilled, (state) => {

@@ -60,7 +60,7 @@ function Navbar() {
 					<BsFillCartFill size={20} className='mr-2' />
 				</button>
 
-				{user.username ? (
+				{user.username || localStorage.getItem('token') ? (
 					<NavLink to='/' onClick={onLogout}>
 						<div className='flex items-center text-white'>
 							<FiLogOut size={15} className='mr-2 cursor-pointer' />
