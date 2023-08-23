@@ -9,7 +9,7 @@ function UserProfile() {
 
 	useEffect(() => {
 		dispatch(loadUserFromStorage());
-	}, []);
+	}, [dispatch]);
 
 	return (
 		<div className='flex flex-col mt-5'>

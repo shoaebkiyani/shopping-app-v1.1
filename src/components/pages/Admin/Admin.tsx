@@ -12,12 +12,8 @@ function Admin() {
 		dispatch(loadUserFromStorage());
 	}, [dispatch]);
 
-	// const handleUsers = () => {
-	// 	dispatch(getUsers());
-	// };
-
 	return (
-		<div className='w-full border border-black flex '>
+		<div className='w-full flex'>
 			<div className='w-[250px] h-screen bg-gray-900 text-white flex flex-col justify-start items-center p-10'>
 				<h4 className='text-center underline underline-offset-2'>
 					Admin Dashboard
@@ -38,14 +34,11 @@ function Admin() {
 					</NavLink>
 				</div>
 			</div>
-			<div className='p-10 w-full'>
-				{user.id !== '' && (
-					<h1 className='text-center mx-auto'>{`Welcome ${user.username}`}</h1>
-				)}
-        {/* <div>{users && users.map((user: {id: string, username: string}) => (
-                    <div key={user.id}>{user.username}</div>
-                ))}</div> */}
-				<Outlet />
+			<div className='p-10 w-full h-screen overflow-scroll'>
+          {user.id !== '' && (
+            <h1 className='text-center mx-auto'>{`Welcome ${user.username}`}</h1>
+          )}
+          <Outlet />
 			</div>
 		</div>
 	);

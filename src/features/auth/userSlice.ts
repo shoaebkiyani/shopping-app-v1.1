@@ -78,6 +78,7 @@ export const loginUser = createAsyncThunk(
         }
     }
 )
+
 export const getUsers = createAsyncThunk(
     'user/getUsers', async() => {
         try {
@@ -95,6 +96,23 @@ export const getUsers = createAsyncThunk(
             
         }
     })
+
+export const deleteUser = createAsyncThunk(
+    'user/deleteUser', async(id: string) => {
+        try {
+            const token = getTokenFromStorage();
+
+            const response = await api.delete(`/user/${id}`, {
+                headers: {
+                    'Authorization': `Bearer ${token}`
+                }
+            })
+            return response.data.users
+        } catch (error) {
+            console.log(error)   
+        }
+    }
+)
 
 export const logoutUser = createAsyncThunk(
      'user/logout', () => {
@@ -180,6 +198,11 @@ export const userSlice = createSlice({
             state.isError = true
             if(typeof action.error.message === 'string')
             state.message = action.error.message
+          })
+
+          builder.addCase(deleteUser.fulfilled, (state, action) => {
+            state.isLoading = false
+            state.users = action.payload
           })
 
           builder.addCase(logoutUser.fulfilled, (state) => {

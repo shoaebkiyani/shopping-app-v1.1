@@ -4,7 +4,7 @@ import { BsChevronCompactLeft, BsChevronCompactRight } from 'react-icons/bs'
 import {RxDotFilled} from 'react-icons/rx';
 
 function ImageSlider() {
- 
+
     const slides = [
         {url: '../../public/images/slider/slider_1.jpg'},
         {url: '../../public/images/slider/slider_2.jpg'},
@@ -60,6 +60,7 @@ function ImageSlider() {
     }
    
   return (
+    <>
     <div className='xs:flex-wrap flex sm:h-[280px] md:h-[350px] lg:h-[400px]'>
         <div ref={slideRef} onMouseOver={pauseSlide} className='w-full xs:h-[280px] lg:h-[400px] relative group'>
             <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className='h-full bg-cover bg-no-repeat transition-all duration-500'></div>
@@ -87,7 +88,7 @@ function ImageSlider() {
                <img className='w-full h-[50%]' src='../public/images/banner/banner_2.jpg' alt='banner' />
         </div>
     </div>
-    
+    </>
   )
 }
 export default ImageSlider
