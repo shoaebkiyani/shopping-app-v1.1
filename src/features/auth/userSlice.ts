@@ -11,12 +11,12 @@ enum Role {
 
 export interface UserState {
     user: User,
-    users: [],
+    users: User[],
     isError: boolean,
     isSuccess: boolean,
     isLogged: boolean,
     isLoading: boolean,
-    message: string
+    message: string | null
 }
 
 export type DecodedUser = {

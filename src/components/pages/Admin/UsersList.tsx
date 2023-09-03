@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import Spinner from '../../../../public/spinner/spinner.gif';
+import Spinner from '../../../assets/spinner/spinner.gif';
 
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store';

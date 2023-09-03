@@ -4,6 +4,16 @@ import { User } from '../features/auth/userSlice'
 
 export function getDecodedTokenFromStorage() {
     const token = localStorage.getItem('token')
+ 
+    if(token) {
+		const tokenTime = JSON.parse(atob(token.split('.')[1]))
+		const tokenIsvalid = tokenTime.exp * 1000 < Date.now();
+	
+		if(tokenIsvalid) {
+			localStorage.removeItem('token')
+		}
+	}
+
     if(!token)
     return null
 
@@ -28,5 +38,5 @@ export function getTokenFromStorage() {
     const token = localStorage.getItem('token')
     if(!token) return null
     
-    return token.slice(1, -1)
+    return token.slice(1, -1) as string
 }

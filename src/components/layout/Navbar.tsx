@@ -46,7 +46,7 @@ function Navbar() {
 				</div>
 
 				{/* Search Input */}
-				<div className='px-3 xs:w-[200px] sm:w-[300px] lg:w-[400px] flex rounded-full items-center  bg-gray-300'>
+				<div className='px-3 xs:w-[180px] sm:w-[280px] lg:w-[400px] flex rounded-full items-center  bg-gray-300'>
 					<AiOutlineSearch size={20} />
 					<input
 						className='w-full focus:outline-none p-2 bg-transparent'

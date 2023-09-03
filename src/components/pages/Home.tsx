@@ -5,7 +5,7 @@ import ImageSlider from '../layout/ImageSlider';
 
 import ShipmentIcons from '../layout/ShipmentIcons';
 
-import Spinner from '../../../public/spinner/spinner.gif';
+import Spinner from '../../assets/spinner/spinner.gif';
 
 function Home() {
 	const [isLoading, setIsLoading] = useState(true);
