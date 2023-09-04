@@ -9,7 +9,7 @@ import {
 
 function Footer() {
 	return (
-		<div className='max-w-[1100px] h-[200px] mx-auto shadow-2xl bg-gray-900 text-white container'>
+		<div className='h-[200px] w-full shadow-2xl bg-gray-900 text-white'>
 			<div className='py-0'>
 				<div className='flex justify-evenly items-center py-8 text-[20px]'>
 					<NavLink to={'https://www.facebook.com/'} target={'_blank'}>

@@ -27,9 +27,9 @@ function Navbar() {
 	};
 
 	return (
-		<nav className='fixed z-10 right-0 left-0 w-full max-w-[1100px] mx-auto flex justify-center align-middle p-4 h-14 bg-gradient-to-b from-red-900 to-slate-900'>
+		<nav className='fixed z-10 right-0 left-0 w-full mx-auto flex justify-center align-middle p-4 h-14 bg-gradient-to-b from-red-900 to-slate-900 xs:text-sm'>
 			{/* Left side */}
-			<div className='flex justify-between items-center xs:space-x-5 sm:space-x-5 md:space-x-8 lg:space-x-16'>
+			<div className='flex justify-between items-center xs:space-x-3 sm:space-x-5 md:space-x-8 lg:space-x-16'>
 				<div className='flex items-center text-white'>
 					<NavLink to='/'>
 						<img
@@ -46,7 +46,7 @@ function Navbar() {
 				</div>
 
 				{/* Search Input */}
-				<div className='px-3 xs:w-[180px] sm:w-[280px] lg:w-[400px] flex rounded-full items-center  bg-gray-300'>
+				<div className='px-3 xs:w-[130px] sm:w-[280px] lg:w-[400px] flex rounded-full items-center  bg-gray-300'>
 					<AiOutlineSearch size={20} />
 					<input
 						className='w-full focus:outline-none p-2 bg-transparent'

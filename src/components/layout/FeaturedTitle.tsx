@@ -4,7 +4,7 @@ type TitleProps = {
 
 function FeaturedTitle(props: TitleProps) {
   return (
-    <h1 className='text-xl text-gray-900'>
+    <h1 className='text-xl text-gray-900 mx-4'>
         {props.title}
     </h1>
   )

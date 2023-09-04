@@ -61,8 +61,8 @@ function ImageSlider() {
    
   return (
     <>
-    <div className='xs:flex-wrap flex sm:h-[280px] md:h-[350px] lg:h-[400px]'>
-        <div ref={slideRef} onMouseOver={pauseSlide} className='w-full xs:h-[280px] lg:h-[400px] relative group'>
+    <div className='xs:flex-wrap flex sm:h-[280px] md:h-[350px] lg:h-[550px]'>
+        <div ref={slideRef} onMouseOver={pauseSlide} className='w-full xs:h-[280px] lg:h-[550px] relative group'>
             <div style={{backgroundImage: `url(${slides[currentIndex].url})`}} className='h-full bg-cover bg-no-repeat transition-all duration-500'></div>
             
             {/* Left Arrow */}
@@ -83,7 +83,7 @@ function ImageSlider() {
                 ))}
             </div>
         </div>
-        <div className='sm:h-[280px] md:h-[350px] lg:h-[400px]'>
+        <div className='sm:h-[280px] md:h-[350px] lg:h-[550px]'>
                <img className='w-full h-[50%]' src='../public/images/banner/banner_1.jpg' alt='banner' />
                <img className='w-full h-[50%]' src='../public/images/banner/banner_2.jpg' alt='banner' />
         </div>

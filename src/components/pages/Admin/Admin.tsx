@@ -14,7 +14,7 @@ function Admin() {
 
 	return (
 		<div className='w-full flex xs:flex-col sm:flex-col'>
-			<div className='w-[250px] xs:h-[120px] sm:h-[180px] xs:w-full sm:w-full h-screen bg-gray-900 text-white xs:text-xs flex flex-col justify-start items-center xs:p-4 p-10'>
+			<div className='w-[250px] xs:h-[120px] sm:h-[180px] xs:w-full sm:w-full h-screen bg-gradient-to-b from-slate-900 to-red-900 text-white xs:text-xs flex flex-col justify-start items-center xs:p-4 p-10'>
 				<h4 className='text-center underline underline-offset-2 mb-2'>
 					<NavLink to=''>Admin Dashboard</NavLink>	
 				</h4>
