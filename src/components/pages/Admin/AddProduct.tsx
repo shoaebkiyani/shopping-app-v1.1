@@ -82,7 +82,6 @@ function AddProduct() {
             } });
 		}
 	};
-    console.log(productData)
 
 	const handleSubmit = (e: React.FormEvent) => {
 		e.preventDefault();
@@ -121,7 +120,6 @@ function AddProduct() {
 				navigate('/admin/products');
 				toast.error(error);
 			}
-            console.log('productData', productData)
 			setProductData({
 				title: '',
 				imageURL: '',
@@ -174,7 +172,7 @@ function AddProduct() {
 						<div className='flex flex-col py-2 xs:w-[300px] sm:w-[400px] md:w-[400px]'>
 							<label className='text-white'>Category:</label>
 							<select
-								className='border border-black rounded-md px-2 py-2 mt-1 text-black'
+								className='border border-black rounded-md px-2 py-2 mt-1 text-black cursor-pointer'
 								onChange={handleCategoryChange}
 								name='categoryId'
 								id='categoryId'

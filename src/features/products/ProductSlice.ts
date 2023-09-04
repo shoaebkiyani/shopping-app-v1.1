@@ -2,7 +2,6 @@ import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
 import api from '../../api/axiosConfig'
 import { getTokenFromStorage } from '../../token/token'
 
-
 interface Category {
     id: string,
     name: string
@@ -96,7 +95,17 @@ export const deleteProduct = createAsyncThunk(
 export const productSlice = createSlice({
     name: 'products',
     initialState,
-    reducers: {},
+    reducers: {
+        sortByPriceHighToLow: (state: productState) => {
+            state.products.sort((a,b) => b.price - a.price)
+        },
+        sortByPriceLowToHigh: (state: productState) => {
+            state.products.sort((a,b) => a.price - b.price)
+        },
+        isInStock: (state: productState) => {
+            state.products.filter((product) => product.inStock)
+        }
+    },
     extraReducers(builder) {
         // Fetch Products
         builder.addCase(getProducts.pending, (state) => {
@@ -145,6 +154,7 @@ export const productSlice = createSlice({
             )
         })
 
+        // Delete Product
         builder.addCase(deleteProduct.pending,(state) => {
             state.isLoading = true
         })
@@ -160,4 +170,5 @@ export const productSlice = createSlice({
     },
 })
 
+export const {sortByPriceHighToLow, sortByPriceLowToHigh} = productSlice.actions;
 export default productSlice.reducer

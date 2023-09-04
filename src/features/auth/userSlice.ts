@@ -206,6 +206,8 @@ export const userSlice = createSlice({
           })
 
           builder.addCase(logoutUser.fulfilled, (state) => {
+            state.isLoading = false
+            state.isSuccess = false
             const user: User = {
                 username: '',
                 id: '',
