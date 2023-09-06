@@ -53,7 +53,7 @@ export const registerUser = createAsyncThunk(
             if(isAxiosError<UserState>(error)){
                 return thunkAPI.rejectWithValue(error.response?.data.message)
             } else {
-                 return thunkAPI.rejectWithValue(error)
+                 return thunkAPI.rejectWithValue('Unable to connect to the server')
             }
         }
     }
@@ -73,7 +73,7 @@ export const loginUser = createAsyncThunk(
             if(isAxiosError<UserState>(error)){
                 return thunkAPI.rejectWithValue(error.response?.data.message)
             } else {
-                 return thunkAPI.rejectWithValue(error)
+                 return thunkAPI.rejectWithValue('Unable to connect to the server')
             }
         }
     }

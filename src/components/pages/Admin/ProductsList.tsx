@@ -176,11 +176,6 @@ function ProductsList() {
 										</tr>
 									</thead>
 									<tbody>
-										{/* {products.length < 1 && <tr>
-
-                        Currently no product is in the store
-
-                        </tr>} */}
 										{isInStock
 											? productsInStock.map(
                         (product: Product, index: number) => (
@@ -354,6 +349,10 @@ function ProductsList() {
                       ))}
 									</tbody>
 								</table>
+                      {products.length < 1 && 
+                            <p className='text-sm font-medium mx-auto border border-black border-t-0 mt-0 p-4 text-center'>Currently no product item is in the list.</p>
+
+                        }
 							</div>
 						</div>
 					</div>

@@ -32,7 +32,7 @@ function Register() {
 
 	useEffect(() => {
 		if (isError) {
-			toast.error(message);
+			toast.error('Connection refused');
 		}
 		
         // Redirect when logged in

@@ -31,7 +31,7 @@ function Login() {
 
     useEffect(() => {
 		if (isError) {
-			toast.error(message);
+			toast.error('Server not responded');
 		}
 		
         // Redirect when logged in
