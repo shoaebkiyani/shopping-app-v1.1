@@ -38,7 +38,7 @@ function Navbar() {
 
 	return (
 		<div className='fixed z-10 w-full h-14 bg-gradient-to-b from-red-900 to-slate-900 xs:text-sm text-white'>
-			<nav className='flex justify-between items-center h-14 px-8 max-w-[1300px] mx-auto'>
+			<nav className='flex justify-between items-center h-14 px-8 xs:px-4 xs:space-x-3 max-w-[1300px] mx-auto'>
 				{/* Left side */}
 				<div className='flex justify-center items-center text-white'>
 					<NavLink to='/'>
