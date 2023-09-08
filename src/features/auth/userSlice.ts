@@ -66,7 +66,6 @@ export const loginUser = createAsyncThunk(
             if(response.data) {
                 localStorage.setItem('token', JSON.stringify(response.data.token))
             }
-            console.log(import.meta.env.VITE_API_URL)
             return {
                 token: response.data.token
             }            
