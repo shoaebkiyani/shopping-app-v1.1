@@ -1,6 +1,10 @@
-function Category() {
+import { Category } from "../../../features/category/categorySlice"
+
+function CategoryItem(category: Category) {
   return (
-    <div>Category</div>
+    <>
+      <div className="px-3 bg-gray-400 m-3">{category.name}</div>
+    </>
   )
 }
-export default Category
+export default CategoryItem

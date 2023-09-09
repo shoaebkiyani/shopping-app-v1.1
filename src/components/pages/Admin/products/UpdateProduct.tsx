@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
-import { Product, editProduct } from '../../../features/products/ProductSlice';
+import { Product, editProduct } from '../../../../features/products/ProductSlice';
 import { useDispatch } from 'react-redux';
-import { AppDispatch } from '../../../app/store';
+import { AppDispatch } from '../../../../app/store';
 import { useNavigate, useParams } from 'react-router-dom';
 import { useSelector } from "react-redux";
-import { RootState } from "../../../app/store";
-import { Category, getCategory } from '../../../features/category/categorySlice';
-import { loadUserFromStorage, logoutUser } from '../../../features/auth/userSlice';
+import { RootState } from "../../../../app/store";
+import { Category, getCategory } from '../../../../features/category/categorySlice';
+import { loadUserFromStorage, logoutUser } from '../../../../features/auth/userSlice';
 import { toast } from 'react-toastify';
 
 function UpdateProduct() {

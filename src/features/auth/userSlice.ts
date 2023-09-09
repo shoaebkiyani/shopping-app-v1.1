@@ -1,8 +1,9 @@
 import {createSlice, createAsyncThunk} from '@reduxjs/toolkit'
-import api from '../../api/axiosConfig'
 import jwt_decode from 'jwt-decode'
-import { getDecodedTokenFromStorage, getTokenFromStorage } from '../../token/token'
+import api from '../../api/axiosConfig'
 import { isAxiosError } from 'axios'
+
+import { getDecodedTokenFromStorage, getTokenFromStorage } from '../../token/token'
 
 enum Role {
     ADMIN = 'ADMIN',

@@ -1,14 +1,14 @@
 import { useEffect } from 'react';
-
-import Spinner from '../../../assets/spinner/spinner.gif';
-
 import { useSelector, useDispatch } from 'react-redux';
-import { AppDispatch, RootState } from '../../../app/store';
+import { AppDispatch, RootState } from '../../../../app/store';
+
+import Spinner from '../../../../assets/spinner/spinner.gif';
+
 import {
 	deleteUser,
 	getUsers,
 	loadUserFromStorage,
-} from '../../../features/auth/userSlice';
+} from '../../../../features/auth/userSlice';
 
 function UsersList() {
 	const { users, isLoading } = useSelector((state: RootState) => state.user);

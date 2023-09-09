@@ -2,14 +2,17 @@ import { useEffect, useState } from 'react';
 import {
 	loadUserFromStorage,
 	logoutUser,
-} from '../../../features/auth/userSlice';
-import { AppDispatch, RootState } from '../../../app/store';
+} from '../../../../features/auth/userSlice';
+import { AppDispatch, RootState } from '../../../../app/store';
 import { useDispatch, useSelector } from 'react-redux';
 import {
 	Category,
 	getCategory,
-} from '../../../features/category/categorySlice';
-import { Product, addProduct } from '../../../features/products/ProductSlice';
+} from '../../../../features/category/categorySlice';
+import {
+	Product,
+	addProduct,
+} from '../../../../features/products/ProductSlice';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -32,10 +35,10 @@ function AddProduct() {
 		inStock: false,
 		description: '',
 		categoryId: '',
-        category: {
-            id: '',
-            name: ''
-        }
+		category: {
+			id: '',
+			name: '',
+		},
 	});
 
 	interface productData {
@@ -47,19 +50,36 @@ function AddProduct() {
 		inStock: boolean;
 		description: string;
 		categoryId: string;
-        category: {
-            id: string,
-            name: string
-        }
+		category: {
+			id: string;
+			name: string;
+		};
 	}
 
-	const { title, imageURL, price, quantity, description, categoryId, category: {id, name} } =
-		productData;
+	const {
+		title,
+		imageURL,
+		price,
+		quantity,
+		description,
+		categoryId,
+		category: { id, name },
+	} = productData;
 
 	useEffect(() => {
 		dispatch(loadUserFromStorage());
 		dispatch(getCategory());
-	}, [dispatch, title, imageURL, price, quantity, description, categoryId, id, name]);
+	}, [
+		dispatch,
+		title,
+		imageURL,
+		price,
+		quantity,
+		description,
+		categoryId,
+		id,
+		name,
+	]);
 
 	const handleChange = (
 		e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -75,11 +95,15 @@ function AddProduct() {
 		);
 
 		if (selectedCategory) {
-			setProductData({ ...productData, categoryId: selectedCategory.id, category: {
-                ...productData.category,
-                id: selectedCategory.id,
-                name: selectedCategory.name
-            } });
+			setProductData({
+				...productData,
+				categoryId: selectedCategory.id,
+				category: {
+					...productData.category,
+					id: selectedCategory.id,
+					name: selectedCategory.name,
+				},
+			});
 		}
 	};
 
@@ -105,16 +129,16 @@ function AddProduct() {
 			}
 			if (!isLoading && !error) {
 				navigate('/admin/products');
-				toast.success('Product added successfully',{
-                    position: "top-right",
-                    autoClose: 3000,
-                    hideProgressBar: false,
-                    closeOnClick: true,
-                    pauseOnHover: true,
-                    draggable: true,
-                    progress: undefined,
-                    theme: "light",
-                    });
+				toast.success('Product added successfully', {
+					position: 'top-right',
+					autoClose: 3000,
+					hideProgressBar: false,
+					closeOnClick: true,
+					pauseOnHover: true,
+					draggable: true,
+					progress: undefined,
+					theme: 'light',
+				});
 			}
 			if (error) {
 				navigate('/admin/products');
@@ -129,10 +153,10 @@ function AddProduct() {
 				description: '',
 				id: '',
 				categoryId: '',
-                category: {
-                    id: '',
-                    name: ''
-                }
+				category: {
+					id: '',
+					name: '',
+				},
 			});
 		}
 	};
