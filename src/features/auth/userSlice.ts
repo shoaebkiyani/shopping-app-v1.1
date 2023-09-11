@@ -81,7 +81,7 @@ export const loginUser = createAsyncThunk(
 )
 
 export const getUsers = createAsyncThunk(
-    'user/getUsers', async() => {
+    'user/getUsers', async(_, thunkAPI) => {
         try {
             const token = getTokenFromStorage();
             
@@ -93,13 +93,13 @@ export const getUsers = createAsyncThunk(
                 return response.data.users
        
         } catch (error) {
-            console.log(error)
+            return thunkAPI.rejectWithValue('Error fetching users')
             
         }
     })
 
 export const deleteUser = createAsyncThunk(
-    'user/deleteUser', async(id: string) => {
+    'user/deleteUser', async(id: string, thunkAPI) => {
         try {
             const token = getTokenFromStorage();
 
@@ -110,7 +110,7 @@ export const deleteUser = createAsyncThunk(
             })
             return response.data.users
         } catch (error) {
-            console.log(error)   
+            return thunkAPI.rejectWithValue('Unable to delete the user')   
         }
     }
 )
@@ -138,6 +138,7 @@ export const userSlice = createSlice({
         }
     },
     extraReducers: (builder) => {
+        // Register user
         builder.addCase(registerUser.pending, (state) => {
             state.isLoading = true
           })
@@ -156,6 +157,7 @@ export const userSlice = createSlice({
             state.user = action.payload
           })
           
+          // Login user
           builder.addCase(loginUser.pending, (state) => {
             state.isLoading = true
           })
@@ -183,6 +185,7 @@ export const userSlice = createSlice({
           
           })
 
+          // Fetch users
           builder.addCase(getUsers.pending, (state) => {
             state.isLoading = true,
             state.isError = false,
@@ -201,11 +204,22 @@ export const userSlice = createSlice({
             state.message = action.error.message
           })
 
+          // Delete user
+          builder.addCase(deleteUser.pending, (state) => {
+            state.isLoading = true
+          })
+          builder.addCase(deleteUser.rejected, (state, action) => {
+            state.isLoading = false,
+            state.isError = true
+            if(typeof action.error.message === 'string')
+            state.message = action.error.message
+          })
           builder.addCase(deleteUser.fulfilled, (state, action) => {
             state.isLoading = false
             state.users = action.payload
           })
 
+          // Logout user
           builder.addCase(logoutUser.fulfilled, (state) => {
             state.isLoading = false
             state.isSuccess = false

@@ -74,7 +74,7 @@ function Navbar() {
 					</li>
 					<li>
 						{user.username || token ? (
-							<div className='flex justify-center items-center px-4 xs:visible sm:visible'>
+							<div className='flex justify-center items-center xs:px-2 px-4 xs:visible sm:visible'>
 								<div className='flex items-center justify-center'>
 									<button
 										onClick={handleUser}

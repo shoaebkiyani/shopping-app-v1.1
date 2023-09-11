@@ -101,7 +101,7 @@ function Login() {
                             }
                             </div>
                         </div>
-                        <div className='mt-4 flex justify-between font-semibold text-sm'>
+                        <div className='mt-4 flex justify-between font-semibold text-xs'>
                             <label className='flex text-slate-500 hover:text-slate-600 cursor-pointer'>
                                 <input className='mr-1' type='checkbox' />
                                 <span>Remember Me</span>

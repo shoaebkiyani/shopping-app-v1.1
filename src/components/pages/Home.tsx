@@ -4,7 +4,7 @@ import { AppDispatch } from '../../app/store';
 
 import Spinner from '../../assets/spinner/spinner.gif';
 
-import CategoryList from './Category/CategoryList';
+import Categories from './Category/Categories';
 import { getCategory } from '../../features/category/categorySlice';
 import ImageSlider from '../layout/ImageSlider';
 import Featured from '../layout/Featured';
@@ -39,7 +39,7 @@ function Home() {
 				</div>
 			) : (
 				<>
-					<CategoryList />
+					<Categories />
 					<ImageSlider />
 					<Featured />
 					<ShipmentIcons />
