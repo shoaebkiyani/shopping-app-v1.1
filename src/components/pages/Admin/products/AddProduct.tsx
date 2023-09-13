@@ -1,10 +1,12 @@
 import { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../../app/store';
+import { useNavigate } from 'react-router-dom';
+
 import {
 	loadUserFromStorage,
 	logoutUser,
 } from '../../../../features/auth/userSlice';
-import { AppDispatch, RootState } from '../../../../app/store';
-import { useDispatch, useSelector } from 'react-redux';
 import {
 	Category,
 	getCategory,
@@ -13,7 +15,7 @@ import {
 	Product,
 	addProduct,
 } from '../../../../features/products/ProductSlice';
-import { useNavigate } from 'react-router-dom';
+
 import { toast } from 'react-toastify';
 
 function AddProduct() {

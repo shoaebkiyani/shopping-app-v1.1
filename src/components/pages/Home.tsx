@@ -9,14 +9,14 @@ import { getCategory } from '../../features/category/categorySlice';
 import ImageSlider from '../layout/ImageSlider';
 import Featured from '../layout/Featured';
 import ShipmentIcons from '../layout/ShipmentIcons';
-
+import ProductList from './Products/ProductList';
 
 function Home() {
 	const dispatch = useDispatch<AppDispatch>();
 	const [isLoading, setIsLoading] = useState(true);
 
 	useEffect(() => {
-		dispatch(getCategory())
+		dispatch(getCategory());
 		const onPageLoad = () => {
 			setIsLoading(false);
 		};
@@ -32,7 +32,7 @@ function Home() {
 	return (
 		<>
 			{isLoading ? (
-				<div className='w-full h-screen flex  justify-center items-center'>
+				<div className='w-full h-screen flex justify-center items-center'>
 					<span className='text-white text-center'>
 						<img src={Spinner} alt='Loading...' />
 					</span>
@@ -41,6 +41,7 @@ function Home() {
 				<>
 					<Categories />
 					<ImageSlider />
+					<ProductList />
 					<Featured />
 					<ShipmentIcons />
 				</>

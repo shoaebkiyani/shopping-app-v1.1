@@ -1,7 +1,8 @@
-import { useSelector, useDispatch } from 'react-redux';
-import { loadUserFromStorage } from '../../../features/auth/userSlice';
 import { useEffect } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store';
+
+import { loadUserFromStorage } from '../../../features/auth/userSlice';
 
 function UserProfile() {
 	const { user } = useSelector((state: RootState) => state.user);

@@ -1,13 +1,13 @@
-import { NavLink, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-
-import { toast } from 'react-toastify';
-
-import { registerUser, reset } from '../../../features/auth/userSlice';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../app/store';
+import { NavLink, useNavigate } from 'react-router-dom';
+
+import { registerUser, reset } from '../../../features/auth/userSlice';
 
 import { MdVisibility, MdVisibilityOff } from 'react-icons/md';
+
+import { toast } from 'react-toastify';
 
 function Register() {
 	const [showPassowrd, setShowPassword] = useState(false);
@@ -28,19 +28,19 @@ function Register() {
 	);
 	const dispatch = useDispatch<AppDispatch>();
 	const navigate = useNavigate();
-    const refTimer = useRef<number | null>(null)
+	const refTimer = useRef<number | null>(null);
 
 	useEffect(() => {
 		if (isError) {
 			toast.error('Connection refused');
 		}
-		
-        // Redirect when logged in
+
+		// Redirect when logged in
 		if (isSuccess) {
-            toast.success('Registered Successfully', {autoClose: 1500})
-            refTimer.current = window.setTimeout(() => {
-                navigate('/');
-            },2000)
+			toast.success('Registered Successfully', { autoClose: 1500 });
+			refTimer.current = window.setTimeout(() => {
+				navigate('/');
+			}, 2000);
 		}
 
 		dispatch(reset());

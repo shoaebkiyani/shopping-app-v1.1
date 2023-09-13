@@ -1,4 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
+
 import api from '../../api/axiosConfig';
 import { getTokenFromStorage } from '../../token/token';
 

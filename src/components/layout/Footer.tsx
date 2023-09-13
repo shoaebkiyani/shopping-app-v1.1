@@ -1,11 +1,13 @@
 import { NavLink } from 'react-router-dom';
-import ShopName from './ShopName';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
 	faFacebook,
 	faInstagram,
 	faTwitter,
 } from '@fortawesome/free-brands-svg-icons';
+
+import ShopName from './ShopName';
 
 function Footer() {
 	return (

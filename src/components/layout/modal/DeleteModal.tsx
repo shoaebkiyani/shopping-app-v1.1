@@ -1,16 +1,18 @@
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+
 import { AppDispatch, RootState } from '../../../app/store';
 import {
 	deleteProduct,
 	getProducts,
 } from '../../../features/products/ProductSlice';
-import { toast } from 'react-toastify';
-import { useEffect } from 'react';
 import {
 	loadUserFromStorage,
 	logoutUser,
 } from '../../../features/auth/userSlice';
+
+import { toast } from 'react-toastify';
 
 function DeleteModal() {
 	const { id } = useParams();
@@ -41,16 +43,16 @@ function DeleteModal() {
 			}
 		}
 		if (token === null) {
-            toast('Session expired, Please login again.', {
-                position: "top-right",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
+			toast('Session expired, Please login again.', {
+				position: 'top-right',
+				autoClose: 5000,
+				hideProgressBar: false,
+				closeOnClick: true,
+				pauseOnHover: true,
+				draggable: true,
+				progress: undefined,
+				theme: 'light',
+			});
 			dispatch(logoutUser());
 		} else {
 			if (id) {

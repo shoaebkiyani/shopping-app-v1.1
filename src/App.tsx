@@ -5,20 +5,21 @@ import {
 	RouterProvider,
 } from 'react-router-dom';
 
+import RootLayout from './components/layout/routerLayout/RootLayout';
 import Home from './components/pages/Home';
 import About from './components/pages/About';
 import Login from './components/pages/Auth/Login';
 import Register from './components/pages/Auth/Register';
+import CategoryFilter from './components/pages/Category/CategoryFilter';
 
-import RootLayout from './components/layout/routerLayout/RootLayout';
 import AuthLayout from './components/layout/routerLayout/AuthLayout';
 import Admin from './components/pages/Admin/Admin';
-import UserProfile from './components/pages/User/UserProfile';
 import UsersList from './components/pages/Admin/users/UsersList';
 import ProductsList from './components/pages/Admin/products/ProductsList';
 import AddProduct from './components/pages/Admin/products/AddProduct';
 import UpdateProduct from './components/pages/Admin/products/UpdateProduct';
 import DeleteModal from './components/layout/modal/DeleteModal';
+import UserProfile from './components/pages/User/UserProfile';
 
 import CategoryList from './components/pages/Admin/categories/CategoryList';
 import AddCategory from './components/pages/Admin/categories/AddCategory';
@@ -34,6 +35,7 @@ function App() {
 				<Route path='about' element={<About />} />
 				<Route path='login' element={<Login />} />
 				<Route path='register' element={<Register />} />
+				<Route path='category/:id' element={<CategoryFilter />} />
 
 				{/* Protected Route */}
 				<Route element={<AuthLayout />}>

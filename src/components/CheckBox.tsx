@@ -14,9 +14,11 @@ const Checkbox = (props: Props) => {
 				id={props.label}
 				checked={props.isChecked}
 				onChange={props.handleChange}
-                className='cursor-pointer'
+				className='cursor-pointer'
 			/>
-			<label className='ml-2' htmlFor={props.label}>{props.label}</label>
+			<label className='ml-2' htmlFor={props.label}>
+				{props.label}
+			</label>
 		</div>
 	);
 };

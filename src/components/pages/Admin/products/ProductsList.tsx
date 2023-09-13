@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
-
-import Spinner from '../../../../assets/spinner/spinner.gif';
-
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../../../app/store';
+import { Link, NavLink, Outlet } from 'react-router-dom';
+
+import Spinner from '../../../../assets/spinner/spinner.gif';
 
 import {
 	getProducts,
@@ -11,14 +11,11 @@ import {
 	sortByPriceLowToHigh,
 } from '../../../../features/products/ProductSlice';
 import { Product } from '../../../../features/products/ProductSlice';
-
-import { Link, NavLink, Outlet } from 'react-router-dom';
+import { logoutUser } from '../../../../features/auth/userSlice';
+import Checkbox from '../../../CheckBox';
 
 import { BiEdit } from 'react-icons/bi';
 import { RiDeleteBin6Line } from 'react-icons/ri';
-import { logoutUser } from '../../../../features/auth/userSlice';
-
-import Checkbox from '../../../CheckBox';
 
 function ProductsList() {
 	const { products, isLoading } = useSelector(
@@ -178,175 +175,175 @@ function ProductsList() {
 									<tbody>
 										{isInStock
 											? productsInStock.map(
-                            (product: Product, index: number) => (
-                              <tr
-                                className='border-b dark:border-neutral-500'
-                                key={product.id}
-                              >
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
-                                  {index + 1}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                  <img
-                                    src={product.imageURL}
-                                    alt='productImage'
-                                    className='h-10 w-10 xs:h-8 rounded-full'
-                                  />
-                                  </td>
-                                  <td
-                                  className='whitespace-nowrap xs:px-2 px-4 py-4'
-                                  key={product.id}
-                                  >
-                                  {product.title}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                  {`${product.price}€`}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                  {product.quantity}
-                                  </td>
-                                  <td className='whitespace-wrap xs:px-2 px-4 py-4 max-w-[50px]'>
-                                  {product.description}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                  {product.inStock ? (
-                                    <p>Available</p>
-                                  ) : (
-                                    <p>Out of Stock</p>
-                                  )}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    <div className='flex justify-evenly items-center'>
-                                      <Link
-                                        to={`edit-product/${product.id}`}
-                                        className='text-green-700'
-                                      >
-                                        <BiEdit size={20} />
-                                      </Link>
-                                      <Link
-                                        to={`delete-product/${product.id}`}
-                                        className='text-red-700'
-                                      >
-                                        <RiDeleteBin6Line size={20} />
-                                      </Link>
-                                    </div>
-                                  </td>
-                                </tr>
-                              )
-                            )
-                          : isOutOfStock
-                          ? productsOutOfStock.map(
-                              (product: Product, index: number) => (
-                                <tr
-                                  className='border-b dark:border-neutral-500'
-                                 key={product.id}
-                                >
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
-                                  {index + 1}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    <img
-                                      src={product.imageURL}
-                                      alt='productImage'
-                                      className='h-10 w-10 xs:h-8 rounded-full'
-                                    />
-                                  </td>
-                                  <td
-                                    className='whitespace-nowrap xs:px-2 px-4 py-4'
-                                    key={product.id}
-                                  >
-                                    {product.title}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    {`${product.price}€`}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    {product.quantity}
-                                  </td>
-                                  <td className='whitespace-wrap xs:px-2  px-4 py-4 max-w-[50px]'>
-                                    {product.description}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    {product.inStock ? (
-                                      <p>Available</p>
-                                    ) : (
-                                      <p>Out of Stock</p>
-                                    )}
-                                  </td>
-                                  <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                    <div className='flex justify-evenly items-center'>
-                                      <Link
-                                        to={`edit-product/${product.id}`}
-                                        className='text-green-700'
-                                      >
-                                        <BiEdit size={20} />
-                                      </Link>
-                                      <Link
-                                        to={`delete-product/${product.id}`}
-                                        className='text-red-700'
-                                      >
-                                        <RiDeleteBin6Line size={20} />
-                                      </Link>
-                                    </div>
-                                  </td>
-                                </tr>
-                              )
-                            )
+													(product: Product, index: number) => (
+														<tr
+															className='border-b dark:border-neutral-500'
+															key={product.id}
+														>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
+																{index + 1}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																<img
+																	src={product.imageURL}
+																	alt='productImage'
+																	className='h-10 w-10 xs:h-8 rounded-full'
+																/>
+															</td>
+															<td
+																className='whitespace-nowrap xs:px-2 px-4 py-4'
+																key={product.id}
+															>
+																{product.title}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{`${product.price}€`}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{product.quantity}
+															</td>
+															<td className='whitespace-wrap xs:px-2 px-4 py-4 max-w-[50px]'>
+																{product.description}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{product.inStock ? (
+																	<p>Available</p>
+																) : (
+																	<p>Out of Stock</p>
+																)}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																<div className='flex justify-evenly items-center'>
+																	<Link
+																		to={`edit-product/${product.id}`}
+																		className='text-green-700'
+																	>
+																		<BiEdit size={20} />
+																	</Link>
+																	<Link
+																		to={`delete-product/${product.id}`}
+																		className='text-red-700'
+																	>
+																		<RiDeleteBin6Line size={20} />
+																	</Link>
+																</div>
+															</td>
+														</tr>
+													)
+										)
+											: isOutOfStock
+											? productsOutOfStock.map(
+													(product: Product, index: number) => (
+														<tr
+															className='border-b dark:border-neutral-500'
+															key={product.id}
+														>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
+																{index + 1}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																<img
+																	src={product.imageURL}
+																	alt='productImage'
+																	className='h-10 w-10 xs:h-8 rounded-full'
+																/>
+															</td>
+															<td
+																className='whitespace-nowrap xs:px-2 px-4 py-4'
+																key={product.id}
+															>
+																{product.title}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{`${product.price}€`}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{product.quantity}
+															</td>
+															<td className='whitespace-wrap xs:px-2  px-4 py-4 max-w-[50px]'>
+																{product.description}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																{product.inStock ? (
+																	<p>Available</p>
+																) : (
+																	<p>Out of Stock</p>
+																)}
+															</td>
+															<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+																<div className='flex justify-evenly items-center'>
+																	<Link
+																		to={`edit-product/${product.id}`}
+																		className='text-green-700'
+																	>
+																		<BiEdit size={20} />
+																	</Link>
+																	<Link
+																		to={`delete-product/${product.id}`}
+																		className='text-red-700'
+																	>
+																		<RiDeleteBin6Line size={20} />
+																	</Link>
+																</div>
+															</td>
+														</tr>
+													)
+										)
 											: products.map((product: Product, index: number) => (
-                            <tr
-                              className='border-b dark:border-neutral-500'
-                              key={product.id}
-                            >
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
-                                {index + 1}
-                              </td>
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                <img
-                                  src={product.imageURL}
-                                  alt='productImage'
-                                  className='h-10 w-10 xs:h-8 rounded-full'
-                                />
-                              </td>
-                              <td
-                                className='whitespace-nowrap xs:px-2 px-4 py-4'
-                                key={product.id}
-                              >
-                                {product.title}
-                              </td>
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                {`${product.price}€`}
-                              </td>
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                {product.quantity}
-                              </td>
-                              <td className='whitespace-wrap xs:px-2 px-4 py-4 max-w-[50px]'>
-                                {product.description}
-                              </td>
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                {product.inStock ? (
-                                  <p>Available</p>
-                                ) : (
-                                  <p>Out of Stock</p>
-                                )}
-                              </td>
-                              <td className='whitespace-nowrap xs:px-2 px-4 py-4'>
-                                <div className='flex justify-evenly items-center'>
-                                  <Link
-                                    to={`edit-product/${product.id}`}
-                                    className='text-green-700'
-                                  >
-                                    <BiEdit size={20} />
-                                  </Link>
-                                  <Link
-                                    to={`delete-product/${product.id}`}
-                                    className='text-red-700'
-                                  >
-                                    <RiDeleteBin6Line size={20} />
-                                  </Link>
-                                </div>
-                              </td>
-                            </tr>
-                          ))}
+													<tr
+														className='border-b dark:border-neutral-500'
+														key={product.id}
+													>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4 font-medium xs:hidden'>
+															{index + 1}
+														</td>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+															<img
+																src={product.imageURL}
+																alt='productImage'
+																className='h-10 w-10 xs:h-8 rounded-full'
+															/>
+														</td>
+														<td
+															className='whitespace-nowrap xs:px-2 px-4 py-4'
+															key={product.id}
+														>
+															{product.title}
+														</td>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+															{`${product.price}€`}
+														</td>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+															{product.quantity}
+														</td>
+														<td className='whitespace-wrap xs:px-2 px-4 py-4 max-w-[50px]'>
+															{product.description}
+														</td>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+															{product.inStock ? (
+																<p>Available</p>
+															) : (
+																<p>Out of Stock</p>
+															)}
+														</td>
+														<td className='whitespace-nowrap xs:px-2 px-4 py-4'>
+															<div className='flex justify-evenly items-center'>
+																<Link
+																	to={`edit-product/${product.id}`}
+																	className='text-green-700'
+																>
+																	<BiEdit size={20} />
+																</Link>
+																<Link
+																	to={`delete-product/${product.id}`}
+																	className='text-red-700'
+																>
+																	<RiDeleteBin6Line size={20} />
+																</Link>
+															</div>
+														</td>
+													</tr>
+										))}
 									</tbody>
 								</table>
 								{products.length < 1 && (

@@ -1,11 +1,13 @@
 import { useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { AppDispatch, RootState } from '../../../../app/store';
+
 import {
 	Category,
 	addCategory,
 } from '../../../../features/category/categorySlice';
-import { useDispatch, useSelector } from 'react-redux';
-import { AppDispatch, RootState } from '../../../../app/store';
 import { logoutUser } from '../../../../features/auth/userSlice';
+
 import { toast } from 'react-toastify';
 
 function AddCategory() {
