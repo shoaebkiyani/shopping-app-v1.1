@@ -1,28 +1,28 @@
+import { Link } from 'react-router-dom';
 import { Product } from '../../../features/products/ProductSlice';
 
 function ProductItem(product: Product) {
 	return (
 		<>
 			<div className='relative m-1 flex max-w-xs flex-col overflow-hidden rounded-lg border border-gray-100 bg-white shadow-md w-full xs:w-[280px]'>
-				<a
+				<Link to={`product/${product.id}`}
 					className='relative mx-3 mt-3 flex h-60 overflow-hidden rounded-xl'
-					href='#'
 				>
 					<img
 						className='object-cover'
 						src={product.imageURL}
-						alt='product image'
+						alt='product'
 					/>
 					<span className='absolute top-0 left-0 m-2 rounded-full bg-black px-2 text-center text-sm font-medium text-white'>
 						39% OFF
 					</span>
-				</a>
+				</Link>
 				<div className='mt-4 px-5 pb-5'>
-					<a href='#'>
+					<Link to={`product/${product.id}`}>
 						<h5 className='text-xl tracking-tight text-slate-900'>
 							{product.title}
 						</h5>
-					</a>
+					</Link>
 					<div className='mt-2 mb-5 flex items-center justify-between'>
 						<p>
 							<span className='text-3xl font-bold text-slate-900'>{`${product.price}€`}</span>
@@ -79,7 +79,8 @@ function ProductItem(product: Product) {
 							</span>
 						</div>
 					</div>
-					<a
+					
+					{/* <a
 						href='#'
 						className='flex items-center justify-center rounded-md bg-slate-900 px-5 py-2.5 text-center text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-blue-300'
 					>
@@ -98,7 +99,7 @@ function ProductItem(product: Product) {
 							/>
 						</svg>
 						Add to cart
-					</a>
+					</a> */}
 				</div>
 			</div>
 		</>

@@ -6,6 +6,7 @@ import Spinner from '../../../assets/spinner/spinner.gif';
 
 import { Product, getProducts } from '../../../features/products/ProductSlice';
 import ProductItem from './ProductItem';
+import { createCart } from '../../../features/cart/cartSlice';
 
 function ProductList() {
 	const { products, isLoading } = useSelector(
@@ -16,6 +17,7 @@ function ProductList() {
 
 	useEffect(() => {
 		dispatch(getProducts());
+		dispatch(createCart());
 	}, [dispatch]);
 
 	return (

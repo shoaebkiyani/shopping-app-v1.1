@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { NavLink, useNavigate } from 'react-router-dom';
+import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
 
@@ -10,9 +10,8 @@ import { logoutUser, reset } from '../../features/auth/userSlice';
 import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
 import { BsPeople } from 'react-icons/bs';
 import { BiCart, BiUserCircle } from 'react-icons/bi';
-import { FiSmartphone, FiLogIn, FiHome, FiLogOut } from 'react-icons/fi';
+import { FiLogIn, FiHome, FiLogOut } from 'react-icons/fi';
 import { SiGnuprivacyguard } from 'react-icons/si';
-import { TbTruckDelivery } from 'react-icons/tb';
 
 function Navbar() {
 	const [navState, setNavState] = useState(false);
@@ -21,6 +20,7 @@ function Navbar() {
 	const navigate = useNavigate();
 
 	const { user } = useSelector((state: RootState) => state.user);
+	const {cart} = useSelector((state:RootState) => state.cart)
 
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -134,9 +134,12 @@ function Navbar() {
 						)}
 					</li>
 					{/* Cart */}
-					<button className='text-white '>
+					<Link to = '/cart' className='text-white '>
+						<div className='bg-amber-800 rounded-full'>
+							<p className='absolute mt-[-12px] ml-2 bg-gray-100 rounded-full text-xs text-black h-4 w-4 text-center'>{cart && cart.cartItems.length}</p>
+						</div>
 						<BiCart size={22} className='mr-2' />
-					</button>
+					</Link>
 				</ul>
 
 				{/* Menu Bars */}
@@ -172,28 +175,22 @@ function Navbar() {
 					/>
 					<nav>
 						<ul className='flex flex-col mt-14 mx-8 p-4 text-gray-800'>
-							<li className='text-xl py-4 flex cursor-pointer'>
-								<FiHome size={25} className='mr-4 cursor-pointer' /> Home{' '}
-								<NavLink
-									to='/'
-									onClick={() => setNavState(!navState)}
-								></NavLink>
+							<li className='text-xl py-4 flex cursor-pointer'
+								onClick={() => setNavState(!navState)}
+							>
+							<NavLink to ='/' className='flex'>
+								<FiHome size={25} className='mr-4 cursor-pointer' /> Home
+							</NavLink>
 							</li>
-							<li className='text-xl py-4 flex cursor-pointer'>
-								<BsPeople size={25} className='mr-4 cursor-pointer' /> About{' '}
+							<li className='text-xl py-4 flex cursor-pointer'
+							onClick={() => setNavState(!navState)}
+							>
 								<NavLink
 									to='about'
-									onClick={() => setNavState(!navState)}
-								></NavLink>
-							</li>
-							<li className='text-xl py-4 flex cursor-pointer'>
-								<FiSmartphone size={25} className='mr-4 cursor-pointer' />{' '}
-								<NavLink to='mobile-phones'>Mobile Phones</NavLink>
-							</li>
-							<li className='text-xl py-4 flex cursor-pointer'>
-								<TbTruckDelivery size={25} className='mr-4 cursor-pointer' />{' '}
-								<NavLink to='orders' onClick={() => setNavState(!navState)}>
-									Orders
+									className='flex'
+								>
+								<BsPeople size={25} className='mr-4 cursor-pointer' /> About
+
 								</NavLink>
 							</li>
 							{!user.username || !token ? (

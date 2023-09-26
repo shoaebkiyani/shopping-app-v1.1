@@ -23,9 +23,13 @@ import UserProfile from './components/pages/User/UserProfile';
 
 import CategoryList from './components/pages/Admin/categories/CategoryList';
 import AddCategory from './components/pages/Admin/categories/AddCategory';
+import ProductDetail from './components/pages/Products/ProductDetail';
+
+import CartItem from './components/pages/Cart/CartItem';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+
 
 function App() {
 	const router = createBrowserRouter(
@@ -36,6 +40,8 @@ function App() {
 				<Route path='login' element={<Login />} />
 				<Route path='register' element={<Register />} />
 				<Route path='category/:id' element={<CategoryFilter />} />
+				<Route path='product/:id' element={<ProductDetail />} />
+				<Route path='cart' element={<CartItem />} />
 
 				{/* Protected Route */}
 				<Route element={<AuthLayout />}>
