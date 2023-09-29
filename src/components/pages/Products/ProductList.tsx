@@ -29,7 +29,7 @@ function ProductList() {
 					</span>
 				</div>
 			)}
-			<div className='flex flex-wrap justify-evenly xs:flex-col xs:items-center max-w-screen-2xl m-auto py-2 px-4'>
+			<div className='flex flex-wrap justify-evenly items-center xs:flex-col xs:items-center w-full'>
 				{products.map((product: Product) => (
 					<div key={product.id}>
 						<ProductItem {...product} />

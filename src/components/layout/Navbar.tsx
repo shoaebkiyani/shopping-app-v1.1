@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, NavLink, useNavigate } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { AppDispatch, RootState } from '../../app/store';
@@ -12,6 +12,7 @@ import { BsPeople } from 'react-icons/bs';
 import { BiCart, BiUserCircle } from 'react-icons/bi';
 import { FiLogIn, FiHome, FiLogOut } from 'react-icons/fi';
 import { SiGnuprivacyguard } from 'react-icons/si';
+import { getCart } from '../../features/cart/cartSlice';
 
 function Navbar() {
 	const [navState, setNavState] = useState(false);
@@ -20,7 +21,7 @@ function Navbar() {
 	const navigate = useNavigate();
 
 	const { user } = useSelector((state: RootState) => state.user);
-	const {cart} = useSelector((state:RootState) => state.cart)
+	const {cartItems} = useSelector((state:RootState) => state.cart.cart)
 
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -35,6 +36,10 @@ function Navbar() {
 	const handleUser = () => {
 		setShowProfile(!showProfile);
 	};
+
+	useEffect(()=>{
+		dispatch(getCart());
+	},[dispatch])
 
 	return (
 		<div className='fixed z-10 w-full h-14 bg-gradient-to-b from-red-900 to-slate-900 xs:text-sm text-white'>
@@ -136,7 +141,7 @@ function Navbar() {
 					{/* Cart */}
 					<Link to = '/cart' className='text-white '>
 						<div className='bg-amber-800 rounded-full'>
-							<p className='absolute mt-[-12px] ml-2 bg-gray-100 rounded-full text-xs text-black h-4 w-4 text-center'>{cart && cart.cartItems.length}</p>
+							<p className='absolute mt-[-12px] ml-2 bg-gray-100 rounded-full text-xs text-black h-4 w-4 text-center'>{cartItems && cartItems.length}</p>
 						</div>
 						<BiCart size={22} className='mr-2' />
 					</Link>

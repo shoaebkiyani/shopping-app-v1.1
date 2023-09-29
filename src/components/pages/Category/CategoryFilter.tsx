@@ -34,11 +34,11 @@ function CategoryFilter() {
 				</div>
 			)}
 			<NavLink to='/'>
-				<div className='w-32 p-2 mt-4 mx-10 rounded-md text-center font-medium text-white bg-gray-800 cursor-pointer'>
-					Back
+				<div className='w-32 p-2 my-4 mx-10 rounded-md text-center font-medium text-white bg-gray-800 cursor-pointer'>
+					<span>Back</span>
 				</div>
 			</NavLink>
-			<div className='flex flex-wrap justify-evenly xs:flex-col xs:items-center max-w-screen-2xl m-auto py-2 px-4'>
+			<div className='flex flex-wrap justify-evenly xs:flex-col xs:items-center max-w-screen-2xl m-auto my-4 py-2 px-4'>
 				{filteredCat.length < 1 && (
 					<div>No products found under this category</div>
 				)}

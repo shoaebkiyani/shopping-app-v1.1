@@ -26,10 +26,12 @@ export default {
       //'2xl': {'min': '1536px'},
       // => @media (min-width: 1536px) { ... }
      },
-    extend: {},
+    extend: {
+      opacity: ['disabled']
+    },
   },
-  plugins: [
-    // eslint-disable-next-line no-undef
+  plugins: [ 
+    /*eslint-env node*/
     require('@tailwindcss/aspect-ratio'),
-  ],
+    require("daisyui")],
 }

@@ -17,7 +17,7 @@ function Categories() {
 	}, [dispatch]);
 
 	return (
-		<div className='flex xs:flex-col justify-evenly xs:text-center p-3 bg-gray-800'>
+		<div className='flex xs:flex-col justify-evenly xs:text-center p-3 bg-[#1d232a]'>
 			{categories &&
 				categories.map((category) => (
 					<ul key={category.id}>
