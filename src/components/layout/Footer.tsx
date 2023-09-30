@@ -11,7 +11,7 @@ import ShopName from './ShopName';
 
 function Footer() {
 	return (
-		<div className='h-[200px] w-full shadow-2xl bg-gray-900 text-white'>
+		<div className='h-[250px] w-full shadow-2xl bg-gray-900 text-white'>
 			<div className='py-0'>
 				<div className='flex justify-evenly items-center py-8 text-[20px]'>
 					<NavLink to={'https://www.facebook.com/'} target={'_blank'}>

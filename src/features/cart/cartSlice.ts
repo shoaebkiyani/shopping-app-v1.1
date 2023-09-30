@@ -97,16 +97,7 @@ export const deleteItem = createAsyncThunk(
 export const cartSlice = createSlice ({
     name: 'cart',
     initialState,
-    reducers: {
-        //sumPrice: (state: cartItem[]) => {
-        //    const calPrice = state.cartItems.map((item) => item.totalPrice)
-        //    console.log(calPrice)
-            //calPrice.reduce((a, b) => a + b)
-        //    const calPrice = state.cart.cartItems.reduce((acc, item) => acc + item.totalPrice, 0);
-        //    state.priceCal = calPrice;
-        //    console.log(state.priceCal)
-       // }
-    },
+    reducers: {},
     extraReducers(builder) {
         builder.addCase(createCart.pending, (state) => {
 			state.isLoading = true;

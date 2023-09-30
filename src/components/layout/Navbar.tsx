@@ -7,7 +7,7 @@ import logo from '../../assets/logo.svg';
 import ShopName from './ShopName';
 import { logoutUser, reset } from '../../features/auth/userSlice';
 
-import { AiOutlineClose, AiOutlineMenu, AiOutlineSearch } from 'react-icons/ai';
+import { AiOutlineClose, AiOutlineMenu } from 'react-icons/ai';
 import { BsPeople } from 'react-icons/bs';
 import { BiCart, BiUserCircle } from 'react-icons/bi';
 import { FiLogIn, FiHome, FiLogOut } from 'react-icons/fi';
@@ -21,7 +21,7 @@ function Navbar() {
 	const navigate = useNavigate();
 
 	const { user } = useSelector((state: RootState) => state.user);
-	const {cartItems} = useSelector((state:RootState) => state.cart.cart)
+	const {cartItems} = useSelector((state: RootState) => state.cart.cart)
 
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -58,16 +58,6 @@ function Navbar() {
 							<ShopName first={'Tech'} last={'Zone'} />
 						</div>
 					</NavLink>
-				</div>
-				<div className='flex flex-shrink justify-center items-center px-2 rounded-sm bg-zinc-300 text-black'>
-					<input
-						className='w-full focus:outline-none p-1 bg-transparent'
-						type='text'
-						placeholder='Search product'
-					/>
-					<button className='cursor-pointer'>
-						<AiOutlineSearch size={20} />
-					</button>
 				</div>
 				{/* Nav menu */}
 				<ul className='flex justify-end items-center'>

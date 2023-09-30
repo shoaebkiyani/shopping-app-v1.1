@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 function ProductDetail() {
 	const { id } = useParams();
 	const { products } = useSelector((state: RootState) => state.products);
-	const { isLoading, error } = useSelector((state: RootState) => state.cart);
+	const { isLoading, error, cart } = useSelector((state: RootState) => state.cart);
 
 	const dispatch = useDispatch<AppDispatch>();
 
@@ -24,7 +24,11 @@ function ProductDetail() {
 
 	const handleAddToCart = () => {
 		if (id) {
-			dispatch(addToCart({ id, quantity }));
+			if(cart.cartItems.find((item) => item.cartItemId === id)) {
+				toast.warn("Item already in the cart")
+			} else {
+				dispatch(addToCart({ id, quantity }));
+			}
 		}
 		if (!isLoading && error === null) {
 			toast.success('Item successfully added to cart');
@@ -91,8 +95,8 @@ function ProductDetail() {
 
 								<div className='ml-5'>
 									<ul className='list-disc'>
-										{productDetails?.description.split(',').map((desc) => (
-											<li>{desc}</li>
+										{productDetails?.description.split(',').map((desc, index) => (
+											<li key={index}>{desc}</li>
 										))}
 									</ul>
 								</div>
