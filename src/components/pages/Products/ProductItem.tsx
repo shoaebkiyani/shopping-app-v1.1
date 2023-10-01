@@ -11,7 +11,7 @@ function ProductItem(product: Product) {
 						className='relative mt-3 h-full rounded-xl'
 					>
 						<img
-							className='object-cover h-64 w-full xs:h-44'
+							className='object-cover bg-transparent h-64 w-full xs:h-44'
 							src={product.imageURL}
 							alt='product'
 						/>

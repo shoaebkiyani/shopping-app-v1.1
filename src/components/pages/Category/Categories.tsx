@@ -22,7 +22,7 @@ function Categories() {
 				categories.map((category) => (
 					<ul key={category.id}>
 						<NavLink to={`category/${category.name}`}>
-							<li className='mr-3 xs:mb-3 p-2 border border-rose-600 bg-rose-950 text-white text-center cursor-pointer'>
+							<li className='mr-3 xs:mb-3 p-2 border border-rose-600 bg-rose-950 text-white text-center cursor-pointer rounded-lg'>
 								{category.name.toUpperCase()}
 							</li>
 						</NavLink>
