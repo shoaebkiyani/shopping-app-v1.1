@@ -143,8 +143,8 @@ function ProductsList() {
 					<div className='overflow-x-auto sm:-mx-6 lg:-mx-8'>
 						<div className='inline-block min-w-full py-2 sm:px-6 lg:px-8'>
 							<div className='overflow-hidden'>
-								<table className='min-w-full text-left xs:text-[10px] text-sm font-light border border-black'>
-									<thead className='border-b font-medium dark:border-neutral-500 bg-gray-950 text-white'>
+								<table className='min-w-full xs:text-[10px] text-sm font-light border border-black'>
+									<thead className='border-b font-medium dark:border-neutral-500 bg-gray-950 text-white text-center'>
 										<tr>
 											<th scope='col' className='xs:px-2 px-4 py-4 xs:hidden'>
 												#
@@ -187,7 +187,7 @@ function ProductsList() {
 																<img
 																	src={product.imageURL}
 																	alt='productImage'
-																	className='h-10 w-10 xs:h-8 rounded-full'
+																	className='h-10 w-10 xs:h-8 rounded-full object-cover'
 																/>
 															</td>
 															<td
@@ -230,7 +230,7 @@ function ProductsList() {
 															</td>
 														</tr>
 													)
-										)
+											  )
 											: isOutOfStock
 											? productsOutOfStock.map(
 													(product: Product, index: number) => (
@@ -288,7 +288,7 @@ function ProductsList() {
 															</td>
 														</tr>
 													)
-										)
+											  )
 											: products.map((product: Product, index: number) => (
 													<tr
 														className='border-b dark:border-neutral-500'
@@ -343,7 +343,7 @@ function ProductsList() {
 															</div>
 														</td>
 													</tr>
-										))}
+											  ))}
 									</tbody>
 								</table>
 								{products.length < 1 && (
@@ -359,4 +359,5 @@ function ProductsList() {
 		</div>
 	);
 }
+
 export default ProductsList;

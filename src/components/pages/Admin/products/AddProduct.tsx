@@ -18,6 +18,15 @@ import {
 
 import { toast } from 'react-toastify';
 
+// firebase
+import { app } from '../../../../firebase';
+import {
+	getDownloadURL,
+	getStorage,
+	ref,
+	uploadBytesResumable,
+} from 'firebase/storage';
+
 function AddProduct() {
 	const { categories } = useSelector((state: RootState) => state.category);
 	const { isLoading, error } = useSelector(
@@ -163,6 +172,38 @@ function AddProduct() {
 		}
 	};
 
+	const [imageData, setImageData] = useState<File | undefined>(undefined);
+
+	useEffect(() => {
+		if (imageData) {
+			handleImageUpload(imageData);
+		}
+	}, [imageData]);
+
+	const handleImageUpload = async (imageData: File) => {
+		const storage = getStorage(app);
+		const fileName = new Date().getTime() + imageData.name;
+		const storageRef = ref(storage, fileName);
+		const uploadTask = uploadBytesResumable(storageRef, imageData);
+
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				const progress =
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				console.log(progress);
+			},
+			(err) => {
+				console.log(err);
+			},
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					setProductData({ ...productData, imageURL: downloadURL });
+				});
+			}
+		);
+	};
+
 	return (
 		<div className='fixed bg-black inset-0 bg-opacity-70 backdrop-blur-sm min-w-full min-h-full z-40 left-0 top-0'>
 			<div className='xs:my-8 sm:my-8 md:my-10 flex flex-col justify-center items-center mx-auto font-small w-full'>
@@ -198,7 +239,7 @@ function AddProduct() {
 						<div className='flex flex-col py-2 xs:w-[300px] sm:w-[400px] md:w-[400px]'>
 							<label className='text-white'>Category:</label>
 							<select
-								className='border border-black rounded-md px-2 py-2 mt-1 text-black cursor-pointer'
+								className='border border-black rounded-md px-2 py-2 mt-1 dark:text-white cursor-pointer'
 								onChange={handleCategoryChange}
 								name='categoryId'
 								id='categoryId'
@@ -218,11 +259,10 @@ function AddProduct() {
 								className='border border-black rounded-md px-2 py-2 mt-1'
 								type='number'
 								min={0}
-								step={0.01}
-								placeholder='Price'
+								placeholder='0'
 								id='price'
 								name='price'
-								value={price}
+								value={price === 0 ? '' : price}
 								onChange={handleChange}
 							/>
 						</div>
@@ -232,10 +272,10 @@ function AddProduct() {
 								className='border border-black rounded-md px-2 py-2 mt-1'
 								type='number'
 								min={0}
-								placeholder='quantity'
+								placeholder='0'
 								id='quantity'
 								name='quantity'
-								value={quantity}
+								value={quantity === 0 ? '' : quantity}
 								onChange={handleChange}
 							/>
 						</div>
@@ -243,12 +283,18 @@ function AddProduct() {
 							<label className='text-white'>Image URL:</label>
 							<input
 								className='border border-black rounded-md px-2 py-2 mt-1'
-								type='text'
+								type='file'
+								accept='image/*'
 								placeholder='Image URL'
 								id='imageURL'
 								name='imageURL'
-								value={imageURL}
-								onChange={handleChange}
+								// value={imageURL}
+								onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+									const file = e.target.files?.[0];
+									if (file) {
+										setImageData(file);
+									}
+								}}
 							/>
 						</div>
 						<div className='flex flex-col py-2 xs:w-[300px] sm:w-[400px] md:w-[400px]'>

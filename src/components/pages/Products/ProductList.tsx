@@ -18,7 +18,9 @@ function ProductList() {
 
 	const [filter, setFilter] = useState<string>('');
 
-	const filteredProducts = products.filter((product) => product.title.toLowerCase().includes(filter.toLowerCase()));
+	const filteredProducts = products.filter((product) =>
+		product.title.toLowerCase().includes(filter.toLowerCase())
+	);
 
 	useEffect(() => {
 		dispatch(getProducts());
@@ -38,9 +40,24 @@ function ProductList() {
 				<Categories />
 			</div>
 			<div className='relative flex flex-col items-end justify-end xs:justify-center mt-3 mr-5 xs:mx-2'>
-				<input type="text" placeholder="Search products" value={filter} onChange={(e) => setFilter(e.target.value)} className="input input-bordered w-full max-w-xs" />
-				{filter.length > 0 && <button className='absolute top-2 right-3 font-semibold text-lg' onClick={() => setFilter('')}>x</button>}
-				{filter.length > 0 && <p className='mt-2'>{`Items found: ${filteredProducts.length}`}</p>}
+				<input
+					type='text'
+					placeholder='Search products'
+					value={filter}
+					onChange={(e) => setFilter(e.target.value)}
+					className='input input-bordered w-full max-w-xs'
+				/>
+				{filter.length > 0 && (
+					<button
+						className='absolute top-2 right-3 font-semibold text-lg'
+						onClick={() => setFilter('')}
+					>
+						x
+					</button>
+				)}
+				{filter.length > 0 && (
+					<p className='mt-2'>{`Items found: ${filteredProducts.length}`}</p>
+				)}
 			</div>
 			<div className='flex flex-wrap justify-evenly items-center xs:flex-col xs:items-center w-full'>
 				{filteredProducts.map((product: Product) => (
