@@ -28,6 +28,10 @@ import {
 } from 'firebase/storage';
 
 function AddProduct() {
+	const [imageData, setImageData] = useState<File | undefined>(undefined);
+	const [imagePercent, setImagePercent] = useState<number>(0);
+	const [imageError, setImageError] = useState<boolean>(false);
+
 	const { categories } = useSelector((state: RootState) => state.category);
 	const { isLoading, error } = useSelector(
 		(state: RootState) => state.products
@@ -172,14 +176,13 @@ function AddProduct() {
 		}
 	};
 
-	const [imageData, setImageData] = useState<File | undefined>(undefined);
-
 	useEffect(() => {
 		if (imageData) {
 			handleImageUpload(imageData);
 		}
 	}, [imageData]);
 
+	// Image File Upload to Firebase
 	const handleImageUpload = async (imageData: File) => {
 		const storage = getStorage(app);
 		const fileName = new Date().getTime() + imageData.name;
@@ -191,10 +194,11 @@ function AddProduct() {
 			(snapshot) => {
 				const progress =
 					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-				console.log(progress);
+				setImagePercent(Math.round(progress));
 			},
-			(err) => {
-				console.log(err);
+			(error) => {
+				setImageError(true);
+				console.log(error);
 			},
 			() => {
 				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
@@ -288,7 +292,6 @@ function AddProduct() {
 								placeholder='Image URL'
 								id='imageURL'
 								name='imageURL'
-								// value={imageURL}
 								onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
 									const file = e.target.files?.[0];
 									if (file) {
@@ -297,6 +300,21 @@ function AddProduct() {
 								}}
 							/>
 						</div>
+						<p className='text-sm self-center'>
+							{imageError ? (
+								<span className='text-red-700'>
+									Error uploading image (file size must be less than 2 MB)
+								</span>
+							) : imagePercent > 0 && imagePercent < 100 ? (
+								<span className='text-slate-700'>{`Uploading: ${imagePercent} %`}</span>
+							) : imagePercent === 100 ? (
+								<span className='text-green-700'>
+									Image uploaded successfully
+								</span>
+							) : (
+								''
+							)}
+						</p>
 						<div className='flex flex-col py-2 xs:w-[300px] sm:w-[400px] md:w-[400px]'>
 							<label className='text-white'>Description:</label>
 							<textarea

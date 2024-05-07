@@ -16,10 +16,24 @@ import {
 	logoutUser,
 } from '../../../../features/auth/userSlice';
 
+// firebase
+import { app } from '../../../../firebase';
+import {
+	getDownloadURL,
+	getStorage,
+	ref,
+	uploadBytesResumable,
+} from 'firebase/storage';
+
 import { toast } from 'react-toastify';
 
 function UpdateProduct() {
+	const [imageData, setImageData] = useState<File | undefined>(undefined);
+	const [imagePercent, setImagePercent] = useState<number>(0);
+	const [imageError, setImageError] = useState<boolean>(false);
+
 	const { id } = useParams();
+
 	const { products, isLoading, error } = useSelector(
 		(state: RootState) => state.products
 	);
@@ -63,8 +77,7 @@ function UpdateProduct() {
 		};
 	}
 
-	const { title, imageURL, price, quantity, description, categoryId } =
-		productUpdated;
+	const { title, price, quantity, description, categoryId } = productUpdated;
 
 	useEffect(() => {
 		dispatch(loadUserFromStorage());
@@ -143,6 +156,38 @@ function UpdateProduct() {
 		});
 	};
 
+	useEffect(() => {
+		if (imageData) {
+			handleImageUpload(imageData);
+		}
+	}, [imageData]);
+
+	// Image File Upload to Firebase
+	const handleImageUpload = async (imageData: File) => {
+		const storage = getStorage(app);
+		const fileName = new Date().getTime() + imageData.name;
+		const storageRef = ref(storage, fileName);
+		const uploadTask = uploadBytesResumable(storageRef, imageData);
+
+		uploadTask.on(
+			'state_changed',
+			(snapshot) => {
+				const progress =
+					(snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+				setImagePercent(Math.round(progress));
+			},
+			(error) => {
+				setImageError(true);
+				console.log(error);
+			},
+			() => {
+				getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+					setProductUpdated({ ...productUpdated, imageURL: downloadURL });
+				});
+			}
+		);
+	};
+
 	return (
 		<div className='fixed bg-black inset-0 bg-opacity-70 backdrop-blur-sm min-w-full min-h-full z-40 left-0 top-0'>
 			<div className='xs:my-8 sm:my-8 md:my-10 flex flex-col justify-center items-center mx-auto font-small w-full'>
@@ -206,10 +251,10 @@ function UpdateProduct() {
 									type='number'
 									min={0}
 									step={0.01}
-									placeholder='Price'
+									placeholder='0'
 									id='price'
 									name='price'
-									value={price}
+									value={price === 0 ? '' : price}
 									onChange={handleChange}
 								/>
 							</div>
@@ -219,10 +264,10 @@ function UpdateProduct() {
 									className='border border-black rounded-md px-2 py-1 mt-1'
 									type='number'
 									min={0}
-									placeholder='quantity'
+									placeholder='0'
 									id='quantity'
 									name='quantity'
-									value={quantity}
+									value={quantity === 0 ? '' : quantity}
 									onChange={handleChange}
 								/>
 							</div>
@@ -230,14 +275,34 @@ function UpdateProduct() {
 								<label className='text-white'>Image URL:</label>
 								<input
 									className='border border-black rounded-md px-2 py-1 mt-1'
-									type='text'
+									type='file'
+									accept='image/*'
 									placeholder='Image URL'
 									id='imageURL'
 									name='imageURL'
-									value={imageURL}
-									onChange={handleChange}
+									onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+										const file = e.target.files?.[0];
+										if (file) {
+											setImageData(file);
+										}
+									}}
 								/>
 							</div>
+							<p className='text-sm self-center'>
+								{imageError ? (
+									<span className='text-red-700'>
+										Error uploading image (file size must be less than 2 MB)
+									</span>
+								) : imagePercent > 0 && imagePercent < 100 ? (
+									<span className='text-slate-700'>{`Uploading: ${imagePercent} %`}</span>
+								) : imagePercent === 100 ? (
+									<span className='text-green-700'>
+										Image uploaded successfully
+									</span>
+								) : (
+									''
+								)}
+							</p>
 							<div className='flex flex-col py-2 w-[300px]'>
 								<label className='text-white'>Description:</label>
 								<textarea
